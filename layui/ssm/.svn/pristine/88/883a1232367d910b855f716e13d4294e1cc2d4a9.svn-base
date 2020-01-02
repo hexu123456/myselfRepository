@@ -1,0 +1,17 @@
+package com.hx.dao;
+
+import java.util.List;
+
+import com.hx.entity.TblResourceInfo;
+import com.hx.entity.TblRightResource;
+
+
+public interface ResourceDao {
+	 //通过管理员账号获取权限菜单集合
+	 public List<TblResourceInfo> getResourceList();
+	 //添加资源信息
+	 public void addResource(TblResourceInfo tblResourceInfo);
+	 //添加权限与资源信息
+	 public void addRightAndResource(TblRightResource resource);
+	
+}

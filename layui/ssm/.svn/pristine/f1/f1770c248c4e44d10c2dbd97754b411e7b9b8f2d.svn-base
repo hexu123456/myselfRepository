@@ -1,0 +1,11 @@
+package com.hx.tools;
+
+import java.util.HashMap;
+
+public class WebUtils {
+	//实例化map
+	public static HashMap<String,Object> getMap()throws Exception
+	{
+		return new HashMap<String,Object>();
+	}
+}

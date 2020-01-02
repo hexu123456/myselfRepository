@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="layui/css/layui.css" media="all"/>
+		<link rel="stylesheet" href="css/style.css" media="all"/>
+	</head>
+	<body>
+		<div class="layui-fluid" style="margin-top: 20px;">
+			<div class="layui-row layui-col-space10">
+				<!-- 常规轮播 -->
+				<div class="layui-col-sm4 layui-col-md4">
+					<div class="layui-card">
+						<div class="layui-card-header">
+							<fieldset class="layui-elem-field layui-field-title">
+        						<legend>常规轮播</legend>
+        					</fieldset>
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-carousel" id="carousel02">
+								<div carousel-item>
+									<div>
+										<img src="img/a1.jpg" />
+									</div>
+									<div>
+										<img src="img/a2.jpg" />
+									</div>
+									<div>
+										<img src="img/a3.jpg" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 常规轮播 End -->
+				
+				<!-- 标题跟随主体轮播 -->
+				<div class="layui-col-sm4 layui-col-md4">
+					<div class="layui-card">
+						<div class="layui-card-header">
+							<fieldset class="layui-elem-field layui-field-title">
+        						<legend><span id="indexCarousel">标题跟随主体轮播</span></legend>
+        					</fieldset>
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-carousel" id="carousel03" lay-filter="carouselVice">
+								<div carousel-item="">
+									<div>
+										<img src="img/a1.jpg" />
+									</div>
+									<div>
+										<img src="img/a2.jpg" />
+									</div>
+									<div>
+										<img src="img/a3.jpg" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 标题跟随主体轮播 End -->
+				
+				<!-- 其他轮播效果 -->
+				<div class="layui-col-sm4 layui-col-md4">
+					<div class="layui-card">
+						<div class="layui-card-header">
+							<fieldset class="layui-elem-field layui-field-title">
+        						<legend><span id="indexCarousel">其他轮播效果</span></legend>
+        					</fieldset>
+						</div>
+						<div class="layui-card-body">
+							<div style="height: 260px;">
+								<a href="fullScreen.html" class="layui-btn">全屏轮播</a>
+								<a href="http://www.layui.com" class="layui-btn">Layui 官网</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 其他轮播效果 End -->
+				
+				<!-- 向上常规轮播 -->
+				<div class="layui-col-sm4 layui-col-md4">
+					<div class="layui-card">
+						<div class="layui-card-header">
+							<fieldset class="layui-elem-field layui-field-title">
+        						<legend>向上常规轮播</legend>
+        					</fieldset>
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-carousel" id="carousel04">
+								<div carousel-item>
+									<div>
+										<img src="img/a1.jpg" />
+									</div>
+									<div>
+										<img src="img/a2.jpg" />
+									</div>
+									<div>
+										<img src="img/a3.jpg" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 向上常规轮播 End -->
+				
+				<!-- 左右常规轮播 -->
+				<div class="layui-col-sm4 layui-col-md4">
+					<div class="layui-card">
+						<div class="layui-card-header">
+							<fieldset class="layui-elem-field layui-field-title">
+        						<legend>左右常规轮播</legend>
+        					</fieldset>
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-carousel" id="carousel05">
+								<div carousel-item>
+									<div>
+										<img src="img/a1.jpg" />
+									</div>
+									<div>
+										<img src="img/a2.jpg" />
+									</div>
+									<div>
+										<img src="img/a3.jpg" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 左右常规轮播 End -->
+				
+				<!-- 自定义轮播内容 -->
+				<div class="layui-col-sm4 layui-col-md4">
+					<div class="layui-card">
+						<div class="layui-card-header">
+							<fieldset class="layui-elem-field layui-field-title">
+        						<legend>自定义轮播内容</legend>
+        					</fieldset>
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-carousel" id="carousel06">
+								<div carousel-item>
+									<div>
+										<!-- 图表 -->
+										<div id="container" style="height: 240px;"></div>
+									</div>
+									<div>
+										<!-- 表格 -->
+										<table id="demo" lay-filter="test"></table>
+									</div>
+									<div>
+										<!-- 自定义列表 -->
+										<div class="layui-row layui-col-space10">
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+												<div class="zylMain">
+													栏目名称
+												</div>
+											</div>
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+												<div class="zylMain">
+													栏目名称
+												</div>
+											</div>
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+												<div class="zylMain">
+													栏目名称
+												</div>
+											</div>
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+												<div class="zylMain">
+													栏目名称
+												</div>
+											</div>
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+												<div class="zylMain">
+													栏目名称
+												</div>
+											</div>
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+												<div class="zylMain">
+													栏目名称
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 自定义轮播内容 End -->
+				
+				
+				<div class="layui-col-sm12 layui-col-md12">
+					<div class="layui-card">
+						<div class="layui-card-body">
+							<blockquote class="layui-elem-quote layui-text">
+								提示：本案例只是简单的对其进行了整合,具体学习请前往<a href="https://www.layui.com/doc/" target="_blank">Layui官网</a>!!!!注意：表格数据为ajax加载的本地json数据，本地查看会有跨域问题导致数据不能显示！
+							</blockquote>
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="layui/layui.js"></script>
+		<script type="text/javascript" src="js/carousel.js"></script>
+		
+		<!-- 统计图表 -->
+		<script type="text/javascript" src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com.cn/highcharts/modules/oldie.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com.cn/highcharts/modules/venn.js"></script>
+        <script type="text/javascript" src="js/highcharts.js"></script>
+        
+        <!-- 数据表格 -->
+        <script type="text/javascript" src="js/table.js"></script>
+	</body>
+</html>

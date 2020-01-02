@@ -1,0 +1,98 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layui.css">
+
+
+<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="layui-logo">layui 后台布局</div>
+				<div class="left_open">
+		            <i title="展开左侧栏" class="iconfont">&#xe699;</i>
+		        </div>
+				<!-- 头部区域（可配合layui已有的水平导航） -->
+				<ul class="layui-nav layui-layout-left">
+					 <shiro:hasRole name="gzjojo">
+					   <li class="layui-nav-item">
+							<a onclick="openEditAdmin();">超管权限</a>
+						</li>
+					 </shiro:hasRole>
+				</ul>
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item">
+						<a href="javascript:;">
+							<img src="http://t.cn/RCzsdCq" class="layui-nav-img"> 贤心
+						</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a href="">基本资料</a>
+							</dd>
+							<dd>
+								<a href="">安全设置</a>
+							</dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="${pageContext.request.contextPath}/shiro/logout">退出</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="layui-side layui-bg-black">
+				<div class="layui-side-scroll" id="layui-side-scroll">
+					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+					   <c:if test="${!empty plist}">
+					     <c:set var="index"  value="1"/>
+					     <c:forEach var="pic" items="${plist}"> 
+					        <!--默认第一个菜单打开  -->
+							<li class="layui-nav-item  <c:if test="${index==1 }">layui-nav-itemed</c:if>">
+								<a class="" href="javascript:;">${pic.rightname}</a>
+								<dl class="layui-nav-child">
+								   <c:if test="${!empty pic.resourlist}">
+									    <c:forEach var="resurce" items="${pic.resourlist}">
+											<dd>
+												<a href="${pageContext.request.contextPath}${resurce.url}" target="iframe" title="${resurce.resourname}">${resurce.resourname}</a>
+											</dd>
+										</c:forEach>
+									</c:if>
+								</dl>
+							</li>
+							 <c:set var="index"  value="${index+1 }"/>
+						</c:forEach>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+
+			<div class="layui-body" >
+				<iframe id="iframe" style="border:0; width:100%;height: 99%; " name="iframe"  frameborder="0" src="${pageContext.request.contextPath}/admin/index">  </iframe>
+			</div>
+
+			<div class="layui-footer">
+				<!-- 底部固定区域 -->
+				© layui.com - 底部固定区域
+			</div>
+		</div>
+		<!-- js只能放这个位置 -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/layui.all.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/assets/view/flatadminlist.js" ></script>
+		<script>
+			 $(function(){
+				 //layui-nav-itemed
+			 })
+		</script>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+package com.hx.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import com.hx.entity.TblManagerInfo;
+import com.hx.entity.TblManagerRole;
+import com.hx.entity.TblRightInfo;
+import com.hx.entity.TblRoleInfo;
+import com.hx.entity.TblRoleRight;
+
+public interface ManagerDao {
+	//查询超管列表
+	public List<TblManagerInfo> managerList(Map<String,Object> params) throws Exception;
+	//查询添加时当前登录员权限集合
+	public List<TblRightInfo> queryAddMangerResource(long managerid)throws Exception;
+	//查询账号是否存在
+	public int queryManagerCount(String account)throws Exception;
+	//保存平台管理员,返回主键
+	public int savePTManager(TblManagerInfo manager)throws Exception;
+	//保存角色信息
+	public int saveRole(TblRoleInfo role)throws Exception;
+	//保存角色管理员关系
+	public int saveManagerRole(TblManagerRole managerRole)throws Exception;
+	//保存角色权限
+	public int saveRoleRight(TblRoleRight roleRight)throws Exception;
+}

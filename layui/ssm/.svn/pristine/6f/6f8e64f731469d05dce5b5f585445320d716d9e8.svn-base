@@ -1,0 +1,120 @@
+package com.hx.rest.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.hx.dao.ManagerDao;
+import com.hx.entity.TblManagerInfo;
+import com.hx.entity.TblRightInfo;
+import com.hx.service.ManagerService;
+import com.hx.tools.ResultVo;
+import com.hx.tools.WebResult;
+import com.hx.tools.WebUtils;
+
+@Controller
+public class ManagerRestController {
+	@Autowired
+	private ManagerDao managerDao;
+	@Autowired
+	private ManagerService managerService;
+	//超管列表
+	@RequestMapping("/admin/queryManagerList")
+	@ResponseBody
+	public ResultVo queryManagerList(HttpServletResponse response,HttpServletRequest request,
+			@RequestParam("page") Integer pageNo,
+			@RequestParam("limit") Integer pageSize,
+			@RequestParam(value="account",defaultValue="")String account
+			) throws Exception{
+				//实例化封装类
+		ResultVo rv=new ResultVo();
+		try {
+			Map<String,Object> params=new WebUtils().getMap();
+			params.put("account", account);
+		    //实例分页插件
+			PageHelper.startPage(pageNo, pageSize);
+			List<TblManagerInfo> rightList = managerDao.managerList(params);
+			PageInfo<TblManagerInfo> pm = new PageInfo<TblManagerInfo>(rightList,pageSize);
+			rv.setCount(pm.getTotal());//往封装类存入数据量
+			rv.setData(pm.getList());//往封装类存入数据
+			rv.setCode("0");
+		} catch (Exception e) {
+			rv.setCode("1");
+			e.printStackTrace();
+		}
+		return rv;
+	}
+	
+	//查询添加时当前登录员权限集合
+	@RequestMapping("admin/queryAddMangerResource")
+	@ResponseBody
+	public WebResult queryAddMangerResource(HttpServletRequest request,HttpSession session) throws Exception{
+		WebResult webResult=null;
+		String ecatehtml="";
+		Map<String,Object> map=WebUtils.getMap();
+		String managerid=session.getAttribute("managerid").toString();//当前管理员ID
+		try {
+			
+			 List<TblRightInfo> resourceList = managerDao.queryAddMangerResource(Long.valueOf(managerid));
+			 if(resourceList!=null && resourceList.size()>0)
+				{
+					int i=0;
+					//ecatehtml+="<div class='layui-input-block'>";
+					for(TblRightInfo rightinfo:resourceList)
+					{
+						i++;
+						ecatehtml+="<input type='checkbox' name='erightid' value='e"+rightinfo.getRightid()+"' id='e"+rightinfo.getRightid()+"' title='"+rightinfo.getRightname()+"'/>";
+						if(i%3==0)
+							ecatehtml+="<br>";
+					}
+					//ecatehtml+=" </label>";
+				}
+				map.put("ecatehtml",ecatehtml);
+				webResult=WebResult.success("请求成功",map);
+			
+		} catch (Exception e) {
+			
+		}
+		return webResult;
+	}
+	//添加平台管理员权限
+	@RequestMapping("admin/saveFlatManagerInfo")
+	@ResponseBody
+	public WebResult saveFlatManagerInfo(HttpServletRequest request,HttpSession session,
+			@RequestParam(value="rolename" ,defaultValue="")String rolename,
+			@RequestParam(value="linkman" ,defaultValue="")String linkman,
+			@RequestParam(value="linkphone" ,defaultValue="")String linkphone,
+			@RequestParam(value="account" ,defaultValue="")String account,
+			@RequestParam(value="password" ,defaultValue="")String password,
+			@RequestParam(value="rightids" ,defaultValue="",required=false)String rightids) throws Exception{
+		WebResult webResult=null;
+		Map<String,Object> map=WebUtils.getMap();
+		String managerid=session.getAttribute("managerid").toString();
+		try {
+			map.put("managerid",managerid);
+			map.put("rolename",rolename.trim().replaceAll(" ", ""));
+			map.put("linkman",linkman.trim().replaceAll(" ", ""));
+			map.put("linkphone",linkphone.trim().replaceAll(" ", ""));
+			map.put("account",account.trim().replaceAll(" ", ""));
+			map.put("password",password);
+			map.put("rightids",rightids);
+			return managerService.saveFlatManagerInfo(map);
+		} catch (Exception e) {
+			webResult=WebResult.error("服务正忙",null);
+			e.printStackTrace();
+		}
+		return webResult;
+	}
+}

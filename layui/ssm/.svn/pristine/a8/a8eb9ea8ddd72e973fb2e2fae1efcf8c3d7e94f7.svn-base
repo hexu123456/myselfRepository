@@ -1,0 +1,11 @@
+package com.hx.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import com.hx.entity.TblManagerInfo;
+
+public interface ManagerDao {
+	//查询超管列表
+	public List<TblManagerInfo> managerList(Map<String,Object> params) throws Exception;
+}

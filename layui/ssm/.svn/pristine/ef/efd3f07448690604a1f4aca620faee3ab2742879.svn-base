@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.dao.ResourceDao">
+  
+  <!-- 查询资源列表 -->
+   <select id="getResourceList" resultType="com.hx.entity.TblResourceInfo">
+        select * from tbl_resource_info
+      </select>
+      <!-- 添加资源文件 -->
+    <insert id="addResource" useGeneratedKeys="true" keyProperty="resourid" parameterType="com.hx.entity.TblResourceInfo">
+       INSERT INTO tbl_resource_info(resourname,url) VALUES(#{resourname},#{url})
+   </insert>
+   <!-- 权限与资源关系 -->
+    <insert id="addRightAndResource" parameterType="com.hx.entity.TblRightResource">
+       INSERT INTO tbl_right_resource(resourid,rightid) VALUES(#{resourid},#{rightid})
+   </insert>
+</mapper>
